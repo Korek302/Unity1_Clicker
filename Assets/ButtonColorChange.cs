@@ -9,7 +9,7 @@ public class ButtonColorChange : MonoBehaviour, IPointerEnterHandler, IPointerEx
     public Button but;
     public void OnPointerEnter(PointerEventData eventData)
     {
-        but.GetComponent<Image>().color = Color.red;
+        but.GetComponent<Image>().color = Color.grey;
     }
     public void OnPointerExit(PointerEventData eventData)
     {

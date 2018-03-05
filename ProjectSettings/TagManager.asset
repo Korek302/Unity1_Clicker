@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - Canvas
+  - TimerText
+  - ButtonPanel
+  - BackgroundPanel
+  - FinishPanel
+  - Clickable
   layers:
   - Default
   - TransparentFX
