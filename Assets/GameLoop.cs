@@ -9,14 +9,10 @@ public interface IButtonInterface: IEventSystemHandler
     void Message();
 }
 
-public class GameLoop : MonoBehaviour, IButtonInterface
+public class GameLoop : MonoBehaviour
 {
-    public void Message()
-    {
-        transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-    }
-
-    public GameObject Clickable;
+    public GameObject Clickable1;
+    public GameObject Clickable2;
     public Text TimerText;
     public Text FinishTimeText;
     public InputField InputField;
@@ -42,15 +38,32 @@ public class GameLoop : MonoBehaviour, IButtonInterface
         }
 
         ButtonPanel.SetActive(false);
-        BackgroundPanel.SetActive(false);
+        //BackgroundPanel.SetActive(false);
 
         for (int i = 0; i < _numberOfObjects; i++)
         {
+            Vector3 _originalScale = Clickable1.transform.localScale;
             Vector2 _screenBounds = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height));
-            Instantiate(Clickable,
+            if(Random.Range(0, 2) == 1)
+            {
+                float _temp = Random.Range(-0.05f, 0.05f);
+                Clickable1.transform.localScale += new Vector3(_temp, _temp, 0);
+                Instantiate(Clickable1,
                 new Vector3(Random.Range(-_screenBounds[0], _screenBounds[0]),
                     Random.Range(-_screenBounds[1], _screenBounds[1])),
                 Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            }
+            else
+            {
+                float _temp = Random.Range(-0.05f, 0.05f);
+                Clickable2.transform.localScale += new Vector3(_temp, _temp, 0);
+                Instantiate(Clickable2,
+                new Vector3(Random.Range(-_screenBounds[0], _screenBounds[0]),
+                    Random.Range(-_screenBounds[1], _screenBounds[1])),
+                Quaternion.Euler(0, 0, Random.Range(0, 360)));
+            }
+            Clickable1.transform.localScale = _originalScale;
+            Clickable2.transform.localScale = _originalScale;
         }
 
         _running = true;
@@ -66,9 +79,9 @@ public class GameLoop : MonoBehaviour, IButtonInterface
     public void Finish(float finalTime)
     {
         _running = false;
-        FinishTimeText.text = finalTime.ToString();
+        FinishTimeText.text = finalTime.ToString("f2");
 
-        BackgroundPanel.SetActive(true);
+        //BackgroundPanel.SetActive(true);
         FinishPanel.SetActive(true);
         TimerText.gameObject.SetActive(false);
     }

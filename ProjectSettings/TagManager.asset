@@ -10,6 +10,7 @@ TagManager:
   - BackgroundPanel
   - FinishPanel
   - Clickable
+  - Clickable2
   layers:
   - Default
   - TransparentFX
